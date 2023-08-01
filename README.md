@@ -1,3 +1,6 @@
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+
+
 The QcPSP package
 =======================
 
@@ -11,7 +14,7 @@ of Ministère des Ressources naturelles et des Forêts du Québec.
 
 ## License
 
-This package is licensed under the LGPL-2.1. 
+This package is licensed under the LGPL-3. 
 
 ## How to use it
 
