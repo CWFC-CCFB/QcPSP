@@ -7,7 +7,7 @@ The QcPSP package contains a clean version of Quebec PSP data.
 
 The original data was produced and made freely available online
 at https://www.donneesquebec.ca/recherche/dataset/placettes-echantillons-permanentes-1970-a-aujourd-hui by Direction des inventaires forestiers
-of Ministère des Ressources naturelles et des Forêts. 
+of Ministère des Ressources naturelles et des Forêts du Québec. 
 
 ## License
 
