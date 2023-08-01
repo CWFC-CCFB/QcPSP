@@ -1,0 +1,19 @@
+Package: QcPSP
+Type: Package
+Title: Clean Version of Quebec Permanent Sample Plots Data
+Version: 2023.07.13-1
+Authors@R: c(
+    person("Mathieu", "Fortin", email = "mathieu.fortin.re@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6436-2727")))
+Description: This is a clean version of Quebec PSP database, which is freely available (see README).
+URL: https://github.com/CWFC-CCFB/QcPSP
+License: LGPL-3
+Depends:
+    R (>= 3.5.0)
+BugReports: https://github.com/CWFC-CCFB/QcPSP/issues
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.2.3
+LazyDataCompression:xz
