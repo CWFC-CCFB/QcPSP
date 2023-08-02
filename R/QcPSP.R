@@ -26,52 +26,52 @@
 #'
 #' @docType data
 #'
-#' @usage data(plotIndex)
+#' @usage data(QcPlotIndex)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' QcPlotIndex <- QcPSP::plotIndex
-"plotIndex"
+#' data(QcPlotIndex)
+"QcPlotIndex"
 
 #'
 #' A data.frame object containing the tree-level information.
 #'
 #' @docType data
 #'
-#' @usage data(treeIndex)
+#' @usage data(QcTreeIndex)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' QcTreeIndex <- QcPSP::treeIndex
-"treeIndex"
+#' data(QcTreeIndex)
+"QcTreeIndex"
 
 #'
 #' A data.frame object containing the tree:measurement information.
 #'
 #' @docType data
 #'
-#' @usage data(correctedTreeMeasurements)
+#' @usage data(QcTreeMeasurements)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' QcTreeMeasurements <- QcPSP::correctedTreeMeasurements
-"correctedTreeMeasurements"
+#' data(QcTreeMeasurements)
+"QcTreeMeasurements"
 
 #'
 #' A data.frame object containing the plot:measurement information.
 #'
 #' @docType data
 #'
-#' @usage data(measurementIndex)
+#' @usage data(QcMeasurementIndex)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' QcMeasurementIndex <- QcPSP::measurementIndex
-"measurementIndex"
+#' data(QcMeasurementIndex)
+"QcMeasurementIndex"
 
 
 #'
@@ -79,8 +79,8 @@
 #'
 #' @export
 restoreQcPSPData <- function() {
-  assign("QcPlotIndex", QcPSP::plotIndex, envir = .GlobalEnv)
-  assign("QcTreeIndex", QcPSP::treeIndex, envir = .GlobalEnv)
-  assign("QcMeasurementIndex", QcPSP::measurementIndex, envir = .GlobalEnv)
-  assign("QcTreeMeasurements", QcPSP::correctedTreeMeasurements, envir = .GlobalEnv)
+  assign("QcPlotIndex", QcPSP::QcPlotIndex, envir = .GlobalEnv)
+  assign("QcTreeIndex", QcPSP::QcTreeIndex, envir = .GlobalEnv)
+  assign("QcMeasurementIndex", QcPSP::QcMeasurementIndex, envir = .GlobalEnv)
+  assign("QcTreeMeasurements", QcPSP::QcTreeMeasurements, envir = .GlobalEnv)
 }
