@@ -21,66 +21,33 @@
 }
 
 
-#'
-#' A data.frame object containing the plot-level information.
-#'
-#' @docType data
-#'
-#' @usage data(QcPlotIndex)
-#'
-#' @keywords datasets
-#'
-#' @examples
-#' data(QcPlotIndex)
-"QcPlotIndex"
+.loadPackageData <- function(filename) {
+  return(readRDS(system.file(paste0("extdata/",filename,".Rds"), package = "QcPSP")))
+}
 
 #'
-#' A data.frame object containing the tree-level information.
+#' Restore Quebec PSP Data in the Global Environment.
 #'
-#' @docType data
+#' @description This function call creates four data.frame objects that contain
+#' the tree measurements.
 #'
-#' @usage data(QcTreeIndex)
+#' @details
 #'
-#' @keywords datasets
-#'
-#' @examples
-#' data(QcTreeIndex)
-"QcTreeIndex"
-
-#'
-#' A data.frame object containing the tree:measurement information.
-#'
-#' @docType data
-#'
-#' @usage data(QcTreeMeasurements)
-#'
-#' @keywords datasets
-#'
-#' @examples
-#' data(QcTreeMeasurements)
-"QcTreeMeasurements"
-
-#'
-#' A data.frame object containing the plot:measurement information.
-#'
-#' @docType data
-#'
-#' @usage data(QcMeasurementIndex)
-#'
-#' @keywords datasets
-#'
-#' @examples
-#' data(QcMeasurementIndex)
-"QcMeasurementIndex"
-
-
-#'
-#' Restore Quebec PSP data in the global environment
+#' The five data.frame objects are: \cr
+#' \itemize{
+#' \item QcPlotIndex: the index of the plots \cr
+#' \item QcTreeIndex: the index of the trees \cr
+#' \item QcMeasurementIndex: the index of the plot measurements \cr
+#' \item QcTreeMeasurements: the tree measurements \cr
+#' }
 #'
 #' @export
 restoreQcPSPData <- function() {
-  assign("QcPlotIndex", QcPSP::QcPlotIndex, envir = .GlobalEnv)
-  assign("QcTreeIndex", QcPSP::QcTreeIndex, envir = .GlobalEnv)
-  assign("QcMeasurementIndex", QcPSP::QcMeasurementIndex, envir = .GlobalEnv)
-  assign("QcTreeMeasurements", QcPSP::QcTreeMeasurements, envir = .GlobalEnv)
+  assign("QcPlotIndex", .loadPackageData("QcPlotIndex"), envir = .GlobalEnv)
+  assign("QcTreeIndex", .loadPackageData("QcTreeIndex"), envir = .GlobalEnv)
+  assign("QcMeasurementIndex", .loadPackageData("QcMeasurementIndex"), envir = .GlobalEnv)
+  assign("QcTreeMeasurements", .loadPackageData("QcTreeMeasurements"), envir = .GlobalEnv)
 }
+
+
+

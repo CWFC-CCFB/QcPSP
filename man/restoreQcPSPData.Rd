@@ -2,10 +2,20 @@
 % Please edit documentation in R/QcPSP.R
 \name{restoreQcPSPData}
 \alias{restoreQcPSPData}
-\title{Restore Quebec PSP data in the global environment}
+\title{Restore Quebec PSP Data in the Global Environment.}
 \usage{
 restoreQcPSPData()
 }
 \description{
-Restore Quebec PSP data in the global environment
+This function call creates four data.frame objects that contain
+the tree measurements.
+}
+\details{
+The five data.frame objects are: \cr
+\itemize{
+\item QcPlotIndex: the index of the plots \cr
+\item QcTreeIndex: the index of the trees \cr
+\item QcMeasurementIndex: the index of the plot measurements \cr
+\item QcTreeMeasurements: the tree measurements \cr
+}
 }
