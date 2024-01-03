@@ -50,4 +50,85 @@ restoreQcPSPData <- function() {
 }
 
 
+#'
+#' Provide the metadata for any of the four data.frame objects
+#'
+#' @param dFrame a data.frame object. Any of these four: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, or QcTreeMeasurements
+#' @return a data.frame object containing the metadata.
+#'
+#' @export
+getMetaData <- function(dFrame) {
+  objectName <- deparse(substitute(dFrame))
+  if (objectName == "QcPlotIndex") {
+    fieldNames <- c("ID_PE", "newID_PE", "nbMeasurementsAfterFiltering",
+                    "minYearAfterFiltering", "maxYearAfterFiltering", "latitudeDeg",
+                    "longitudeDeg", "elevationM", "regEco",
+                    "EcoType", "pentePerc", "drainageCl",
+                    "penteCl", "depot", "exposition",
+                    "pH_humus", "nonMissingValues")
+    description <- c("Original PSP identifier before plot filtering and correction.",
+                     "PSP identifier after plot filtering and correction.",
+                     "Number of measurements after filtering and correction.",
+                     "Date (yr) of initial measurement.",
+                     "Date (yr) of latest measurement.",
+                     "Latitude (degree).",
+                     "Longitude (degree).",
+                     "Elevation (m).",
+                     "Ecological region code. See tab REG_ECO in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Ecological type code. See tab TYPE_ECOLOGIQUE in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Slope inclination (%).",
+                     "Drainage class. See tab CLASSE_DE_DRAINAGE in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Slope class. See tab CLASSE_DE_PENTE in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Soil type code. See tab DEPOT_DE_SURFACE in file DICTIONNAIRE_PLACETTE.xlsx." ,
+                     "Aspect (degree).",
+                     "Humus pH.",
+                     "A binary variable to indicates that there is no missing information at the plot level.")
+    return(data.frame(Field = fieldNames, Description = description))
+  } else if (objectName == "QcMeasurementIndex") {
+    fieldNames <- c("newID_PE", "k", "ID_PE_MES", "ID_PE", "year", "NO_MES", "ORIGINE", "PERTURB",
+                    "DATE_SOND", "newNO_MES", "N_xxx", "G_xxx")
+    description <- c("PSP identifier after plot filtering and correction.",
+                     "Measurement index after filtering and correction.",
+                     "Measurement identifier which is the concatenation of the fields ID_PE and NO_MES.",
+                     "Original PSP identifier before plot filtering and correction.",
+                     "Date (yr) of plot measurement.",
+                     "Original measurement identifier for this plot (e.g. 1, 2, 3).",
+                     "Stand-replacement disturbance code. See tab PERTURBATION in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Partial disturbance code. See tab PERTURBATION in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Exact measurement date (YY-MM-DD).",
+                     "Measurement identifier after plot filtering and correction.",
+                     "Stem density (trees/ha) of species xxx. TOT stands for all-species density. For species code, see tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Basal area (m^2/ha) of species xxx. TOT stands for all-species basal area. For species code, see tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.")
+    return(data.frame(Field = fieldNames, Description = description))
+  } else if (objectName == "QcTreeIndex") {
+    fieldNames <- c("newID_PE", "j", "NO_ARBRE", "ESSENCE", "nbMeasurements", "minYear",
+                    "maxYear", "IN_1410", "intruder")
+    description <- c("PSP identifier after plot filtering and correction.",
+                     "Tree index after filtering and correction.",
+                     "Original tree index.",
+                     "Species code. See tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Number of measurements for this tree.",
+                     "Initial measurement date (yr).",
+                     "Latest measurement date (yr).",
+                     "A location identifier for trees with DBH > 31 cm. O: The tree is part of the outer circle of the 14.10-m radius plot.",
+                     "A boolean. True if the tree is an intruder.")
+    return(data.frame(Field = fieldNames, Description = description))
+  } else if (objectName == "QcTreeMeasurements") {
+    fieldNames <- c("j", "k", "ETAT", "dbhCm", "hauteurM")
+    description <- c("Tree index after filtering and correction.",
+                     "Measurement index after filtering and correction.",
+                     "Tree status code. See tab ETAT in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Diameter at breast height (cm).",
+                     "Tree height (m).")
+
+    return(data.frame(Field = fieldNames, Description = description))
+  } else {
+    warning("Expecting any of these four data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, or QcTreeMeasurements!")
+  }
+}
+
+
+
+
+
 
