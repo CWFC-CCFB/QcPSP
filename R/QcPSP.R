@@ -58,7 +58,11 @@ restoreQcPSPData <- function() {
 #'
 #' @export
 getMetaData <- function(dFrame) {
-  objectName <- deparse(substitute(dFrame))
+  if (is(dFrame, "character")) {
+    objectName <- dFrame
+  } else {
+    objectName <- deparse(substitute(dFrame))
+  }
   if (objectName == "QcPlotIndex") {
     fieldNames <- c("ID_PE", "newID_PE", "nbMeasurementsAfterFiltering",
                     "minYearAfterFiltering", "maxYearAfterFiltering", "latitudeDeg",
