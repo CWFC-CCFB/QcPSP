@@ -114,12 +114,13 @@ getMetaData <- function(dFrame) {
                      "A boolean. True if the tree is an intruder.")
     return(data.frame(Field = fieldNames, Description = description))
   } else if (objectName == "QcTreeMeasurements") {
-    fieldNames <- c("j", "k", "ETAT", "dbhCm", "hauteurM")
+    fieldNames <- c("j", "k", "ETAT", "dbhCm", "hauteurM", "BAL")
     description <- c("Tree index after filtering and correction.",
                      "Measurement index after filtering and correction.",
                      "Tree status code. See tab ETAT in file DICTIONNAIRE_PLACETTE.xlsx.",
                      "Diameter at breast height (cm).",
-                     "Tree height (m).")
+                     "Tree height (m).",
+                     "Basal area (m2/ha) of trees with DBH larger than the subject.")
 
     return(data.frame(Field = fieldNames, Description = description))
   } else {

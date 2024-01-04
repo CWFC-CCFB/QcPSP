@@ -12,4 +12,4 @@ test_that("Testing nb rows in QcTreeMeasurements", {expect_equal(nrow(QcTreeMeas
 test_that("Testing nb rows in metadata of QcPlotIndex", {expect_equal(nrow(getMetaData(QcPlotIndex)), 17)})
 test_that("Testing nb rows in metadata of QcTreeIndex", {expect_equal(nrow(getMetaData(QcTreeIndex)), 9)})
 test_that("Testing nb rows in metadata of QcMeasurementIndex", {expect_equal(nrow(getMetaData(QcMeasurementIndex)), 12)})
-test_that("Testing nb rows in metadata of QcTreeMeasurements", {expect_equal(nrow(getMetaData(QcTreeMeasurements)), 5)})
+test_that("Testing nb rows in metadata of QcTreeMeasurements", {expect_equal(nrow(getMetaData(QcTreeMeasurements)), 6)})
