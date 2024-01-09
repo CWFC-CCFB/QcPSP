@@ -91,7 +91,7 @@ getMetaData <- function(dFrame) {
   } else if (objectName == "QcMeasurementIndex") {
     fieldNames <- c("newID_PE", "k", "ID_PE_MES", "ID_PE", "year", "NO_MES", "ORIGINE", "PERTURB",
                     "DATE_SOND", "newNO_MES", "N_xxx", "G_xxx")
-    description <- c("PSP identifier after plot filtering and correction.",
+    description <- c("PSP identifier after plot filtering and correction. Link to table QcPlotIndex.",
                      "Measurement index after filtering and correction.",
                      "Measurement identifier which is the concatenation of the fields ID_PE and NO_MES.",
                      "Original PSP identifier before plot filtering and correction.",
@@ -107,7 +107,7 @@ getMetaData <- function(dFrame) {
   } else if (objectName == "QcTreeIndex") {
     fieldNames <- c("newID_PE", "j", "NO_ARBRE", "ESSENCE", "nbMeasurements", "minYear",
                     "maxYear", "IN_1410", "intruder")
-    description <- c("PSP identifier after plot filtering and correction.",
+    description <- c("PSP identifier after plot filtering and correction. Link to table QcPlotIndex.",
                      "Tree index after filtering and correction.",
                      "Original tree index.",
                      "Species code. See tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
@@ -118,14 +118,16 @@ getMetaData <- function(dFrame) {
                      "A boolean. True if the tree is an intruder.")
     return(data.frame(Field = fieldNames, Description = description))
   } else if (objectName == "QcTreeMeasurements") {
-    fieldNames <- c("j", "k", "ETAT", "dbhCm", "hauteurM", "BAL")
-    description <- c("Tree index after filtering and correction.",
-                     "Measurement index after filtering and correction.",
+    fieldNames <- c("j", "k", "ETAT", "dbhCm", "hauteurM", "BAL", "NIVLECTAGE", "AGE", "SOURCE_AGE")
+    description <- c("Tree index after filtering and correction. Link to table QcTreeIndex.",
+                     "Measurement index after filtering and correction. Link to table QcMeasurementIndex.",
                      "Tree status code. See tab ETAT in file DICTIONNAIRE_PLACETTE.xlsx.",
                      "Diameter at breast height (cm).",
                      "Tree height (m).",
-                     "Basal area (m2/ha) of trees with DBH larger than the subject.")
-
+                     "Basal area (m2/ha) of trees with DBH larger than the subject.",
+                     "Height (cm) along the bole at which tree age was measured.",
+                     "Tree age",
+                     "Additional information on how tree age was measured. See tab SOURCE_AGE in file DICTIONNAIRE_PLACETTE.xlsx.")
     return(data.frame(Field = fieldNames, Description = description))
   } else {
     warning("Expecting any of these four data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, or QcTreeMeasurements!")
