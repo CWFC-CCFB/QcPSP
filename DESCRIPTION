@@ -1,7 +1,7 @@
 Package: QcPSP
 Type: Package
 Title: Clean Version of Quebec Permanent Sample Plots Data
-Version: 2023.07.13-6
+Version: 2023.07.13-7
 Authors@R: c(
     person("Mathieu", "Fortin", email = "mathieu.fortin.re@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6436-2727")))
 Description: This is a clean version of Quebec PSP database, which is freely available (see README).
