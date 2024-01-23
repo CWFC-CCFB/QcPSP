@@ -39,6 +39,7 @@
 #' \item QcTreeIndex: the index of the trees \cr
 #' \item QcMeasurementIndex: the index of the plot measurements \cr
 #' \item QcTreeMeasurements: the tree measurements \cr
+#' \item QcSaplingMeasurements.: the tally of the sapling in the 40 m2 subplot \cr
 #' }
 #'
 #' @export
@@ -47,6 +48,7 @@ restoreQcPSPData <- function() {
   assign("QcTreeIndex", .loadPackageData("QcTreeIndex"), envir = .GlobalEnv)
   assign("QcMeasurementIndex", .loadPackageData("QcMeasurementIndex"), envir = .GlobalEnv)
   assign("QcTreeMeasurements", .loadPackageData("QcTreeMeasurements"), envir = .GlobalEnv)
+  assign("QcSaplingMeasurements", .loadPackageData("QcSaplingMeasurements"), envir = .GlobalEnv)
 }
 
 
@@ -129,8 +131,15 @@ getMetaData <- function(dFrame) {
                      "Tree age",
                      "Additional information on how tree age was measured. See tab SOURCE_AGE in file DICTIONNAIRE_PLACETTE.xlsx.")
     return(data.frame(Field = fieldNames, Description = description))
+  } else if (objectName == "QcSaplingMeasurements") {
+    fieldNames <- c("k", "ESSENCE", "CL_DHP", "NB_TIGE")
+    description <- c("Measurement index after filtering and correction. Link to table QcMeasurementIndex.",
+                     "Species code. See tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
+                     "Class of DBH (cm). Those are 2-cm diameter class. The value denotes the median.",
+                     "Number of saplings tallied in the 40 m2 subplot.")
+    return(data.frame(Field = fieldNames, Description = description))
   } else {
-    warning("Expecting any of these four data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, or QcTreeMeasurements!")
+    warning("Expecting any of these four data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, QcTreeMeasurements, or QcSaplingMeasurements!")
   }
 }
 
