@@ -11,9 +11,13 @@ The original data was produced and made freely available online
 at https://www.donneesquebec.ca/recherche/dataset/placettes-echantillons-permanentes-1970-a-aujourd-hui by Direction des inventaires forestiers
 of Ministère des Ressources naturelles et des Forêts du Québec. The original data is published under a CC-BY 4.0 license. 
 
+## Copyright 
+
+(c) 2024 His Majesty the King in Right of Canada  
+
 ## License
 
-This package is licensed under the LGPL-3. 
+This package is licensed under the Lesser General Public License (LGPL-3). 
 
 ## How to use it
 
