@@ -49,13 +49,15 @@ restoreQcPSPData <- function() {
   assign("QcMeasurementIndex", .loadPackageData("QcMeasurementIndex"), envir = .GlobalEnv)
   assign("QcTreeMeasurements", .loadPackageData("QcTreeMeasurements"), envir = .GlobalEnv)
   assign("QcSaplingMeasurements", .loadPackageData("QcSaplingMeasurements"), envir = .GlobalEnv)
+  assign("QcSBWDefoliation", .loadPackageData("QcSBWDefoliation"), envir = .GlobalEnv)
 }
 
 
 #'
 #' Provide the metadata for any of the four data.frame objects
 #'
-#' @param dFrame a data.frame object. Any of these four: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, or QcTreeMeasurements
+#' @param dFrame a data.frame object. Any of these six: QcPlotIndex, QcTreeIndex,
+#' QcMeasurementIndex, QcTreeMeasurements, QcSaplingMeasurements, or QcSBWDefoliation
 #' @return a data.frame object containing the metadata.
 #'
 #' @export
@@ -137,6 +139,11 @@ getMetaData <- function(dFrame) {
                      "Species code. See tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
                      "Class of DBH (cm). Those are 2-cm diameter class. The value denotes the median.",
                      "Number of saplings tallied in the 40 m2 subplot.")
+    return(data.frame(Field = fieldNames, Description = description))
+  } else if (objectName == "QcSBWDefoliation") {
+    fieldNames <- c("newID_PE", "d1968")
+    description <- c("PSP identifier after plot filtering and correction. Link to table QcPlotIndex.",
+                     "The field name contains the year. The field contains the values 0 (no defoliation), 1 (light defoliation), 2 (moderate defoliation), or 3 (severe defoliation)")
     return(data.frame(Field = fieldNames, Description = description))
   } else {
     warning("Expecting any of these four data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, QcTreeMeasurements, or QcSaplingMeasurements!")

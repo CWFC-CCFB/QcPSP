@@ -7,7 +7,8 @@
 getMetaData(dFrame)
 }
 \arguments{
-\item{dFrame}{a data.frame object. Any of these four: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, or QcTreeMeasurements}
+\item{dFrame}{a data.frame object. Any of these six: QcPlotIndex, QcTreeIndex,
+QcMeasurementIndex, QcTreeMeasurements, QcSaplingMeasurements, or QcSBWDefoliation}
 }
 \value{
 a data.frame object containing the metadata.

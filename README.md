@@ -7,9 +7,13 @@ The QcPSP package
 
 The QcPSP package contains a clean version of Quebec PSP data.
 
-The original data was produced and made freely available online
+The original permanent-plot data were produced and made freely available online
 at https://www.donneesquebec.ca/recherche/dataset/placettes-echantillons-permanentes-1970-a-aujourd-hui by Direction des inventaires forestiers
-of Ministère des Ressources naturelles et des Forêts du Québec. The original data is published under a CC-BY 4.0 license. 
+of Ministère des Ressources naturelles et des Forêts du Québec. The original data are published under a CC-BY 4.0 license. 
+
+The spruce budworm defoliation data were produced and made freely available online at 
+https://www.donneesquebec.ca/recherche/dataset/donnees-sur-les-perturbations-naturelles-insecte-tordeuse-des-bourgeons-de-lepinette by 
+Ministère des Ressources naturelles et des Forêts du Québec. The original data are published under a CC-BY 4.0 license.
 
 ## Copyright 
 
@@ -24,24 +28,25 @@ This package is licensed under the Lesser General Public License (LGPL-3).
 The package can be installed using the remotes package:
 
 ~~~R
-library(remotes)
 remotes::install_github("CWFC-CCFB/QcPSP")
 ~~~
 
-To get access to the four tables of the database:
+To get access to the six tables of the database:
 
 ~~~R
 QcPSP::restoreQcPSPData()
 ~~~
 
-This will create four data.frame objects in the global environment:
+This will create six data.frame objects in the global environment:
 
-- QcMeasurementIndex
-- QcPlotIndex
-- QcTreeIndex
-- QcTreeMeasurements
+- QcMeasurementIndex: the plot measurement index
+- QcPlotIndex: the plot index
+- QcTreeIndex: the tree index
+- QcTreeMeasurements: the tree measurements
+- QcSaplingMeasurements: the sapling measurements
+- QcSBWDefoliation: time series of spruce budworm defoliation
 
-Metadata are available for any of these four data.frame objects as follows: 
+Metadata are available for any of these six data.frame objects as follows: 
 
 ~~~R
 QcPSP::getMetaData(QcMeasurementIndex)
