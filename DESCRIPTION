@@ -1,7 +1,7 @@
 Package: QcPSP
 Type: Package
 Title: Clean Version of Quebec Permanent Sample Plots Data
-Version: 2023.07.13-10
+Version: 2023.07.13-11
 Authors@R: c(
     person("Mathieu", "Fortin", email = "mathieu.fortin.re@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6436-2727")),
     person("His Majesty the King in right of Canada", role=c("cph")))
@@ -10,6 +10,8 @@ URL: https://github.com/CWFC-CCFB/QcPSP
 License: LGPL-3
 Depends:
     R (>= 3.5.0)
+Imports:
+    methods (>= 4.4.1)
 BugReports: https://github.com/CWFC-CCFB/QcPSP/issues
 Encoding: UTF-8
 LazyData: true

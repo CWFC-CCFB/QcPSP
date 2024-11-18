@@ -39,7 +39,9 @@
 #' \item QcTreeIndex: the index of the trees \cr
 #' \item QcMeasurementIndex: the index of the plot measurements \cr
 #' \item QcTreeMeasurements: the tree measurements \cr
-#' \item QcSaplingMeasurements.: the tally of the sapling in the 40 m2 subplot \cr
+#' \item QcSaplingMeasurements: the tally of the sapling in the 40 m2 subplot \cr
+#' \item QcSBWDefoliation: the spruce budworm defoliation indices for the plot \cr
+#' \item QcPhotoInterpretation: the photo interpreted stand around the plot \cr
 #' }
 #'
 #' @export
@@ -50,6 +52,7 @@ restoreQcPSPData <- function() {
   assign("QcTreeMeasurements", .loadPackageData("QcTreeMeasurements"), envir = .GlobalEnv)
   assign("QcSaplingMeasurements", .loadPackageData("QcSaplingMeasurements"), envir = .GlobalEnv)
   assign("QcSBWDefoliation", .loadPackageData("QcSBWDefoliation"), envir = .GlobalEnv)
+  assign("QcPhotoInterpretation", .loadPackageData("QcPhotoInterpretation"), envir = .GlobalEnv)
 }
 
 
@@ -62,7 +65,7 @@ restoreQcPSPData <- function() {
 #'
 #' @export
 getMetaData <- function(dFrame) {
-  if (is(dFrame, "character")) {
+  if (methods::is(dFrame, "character")) {
     objectName <- dFrame
   } else {
     objectName <- deparse(substitute(dFrame))
@@ -146,7 +149,7 @@ getMetaData <- function(dFrame) {
                      "The field name contains the year. The field contains the values 0 (no defoliation), 1 (light defoliation), 2 (moderate defoliation), or 3 (severe defoliation)")
     return(data.frame(Field = fieldNames, Description = description))
   } else {
-    warning("Expecting any of these four data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, QcTreeMeasurements, or QcSaplingMeasurements!")
+    warning("Expecting any of these six data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, QcTreeMeasurements, QcSBWDefoliation, or QcSaplingMeasurements!")
   }
 }
 

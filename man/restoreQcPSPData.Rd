@@ -17,6 +17,8 @@ The five data.frame objects are: \cr
 \item QcTreeIndex: the index of the trees \cr
 \item QcMeasurementIndex: the index of the plot measurements \cr
 \item QcTreeMeasurements: the tree measurements \cr
-\item QcSaplingMeasurements.: the tally of the sapling in the 40 m2 subplot \cr
+\item QcSaplingMeasurements: the tally of the sapling in the 40 m2 subplot \cr
+\item QcSBWDefoliation: the spruce budworm defoliation indices for the plot \cr
+\item QcPhotoInterpretation: the photo interpreted stand around the plot \cr
 }
 }

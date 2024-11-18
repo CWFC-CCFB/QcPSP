@@ -10,6 +10,9 @@ test_that("Testing nb rows in QcMeasurementIndex", {expect_equal(nrow(QcMeasurem
 test_that("Testing nb rows in QcTreeMeasurements", {expect_equal(nrow(QcTreeMeasurements), 2089280)})
 test_that("Testing nb rows in QcSaplingMeasurements", {expect_equal(nrow(QcSaplingMeasurements), 223475)})
 test_that("Testing nb rows in QcSaplingMeasurements", {expect_equal(nrow(QcSBWDefoliation), 12816)})
+test_that("Testing nb rows in QcPhotoInterpretation", {expect_equal(nrow(QcPhotoInterpretation), 51083)})
+
+
 
 test_that("Testing nb rows in metadata of QcPlotIndex", {expect_equal(nrow(getMetaData(QcPlotIndex)), 17)})
 test_that("Testing nb rows in metadata of QcTreeIndex", {expect_equal(nrow(getMetaData(QcTreeIndex)), 9)})
