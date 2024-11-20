@@ -2,4 +2,5 @@
 ^\.Rproj\.user$
 ^\.github$
 ^compilation
+^doc
 J4RServer*

@@ -28,11 +28,12 @@
 #'
 #' Restore Quebec PSP Data in the Global Environment.
 #'
-#' @description This function call creates a list with 7 data.frame objects.
+#' @description This function call creates a list called QcPSPData in
+#' the global environment.
 #'
 #' @details
 #'
-#' The five data.frame objects are: \cr
+#' Ths list contains five data.frame objects: \cr
 #' \itemize{
 #' \item plots: the index of the plots \cr
 #' \item treeIndex: the index of the trees \cr
@@ -45,7 +46,7 @@
 #'
 #' @export
 restoreQcPSPData <- function() {
-  assign("QcPSP", .loadPackageData("QcPSP"), envir = .GlobalEnv)
+  assign("QcPSPData", .loadPackageData("QcPSP"), envir = .GlobalEnv)
 }
 
 
@@ -142,7 +143,73 @@ getMetaData <- function(tableName) {
   }
 }
 
+#'
+#' Extract plot list for Artemis-2009 simulation
+#' @param QcPSPData the database that is retrieved through the restoreQcPSPData function
+#' @param list_ID_PE_MES a vector of numerics that stand for the ID_PE_MES
+#' @return a data.frame object formatted for Capsis Web API
+#'
+#' @export
+extractArtemis2009FormatFromTSP4ForMetaModelling <- function(QcPSPData, list_ID_PE_MES) {
+  plotList <- unique(list_ID_PE_MES) ### make sure there is no duplicate
+  mesInfo <- QcPSPData$plotMeasurements[which(QcPSPData$plotMeasurements$ID_PE_MES %in% plotList), c("ID_PE", "k", "ID_PE_MES", "DATE_SOND")]
+  plotInfo <- merge(QcPSPData$plots[, c("ID_PE", "latitudeDeg", "longitudeDeg", "elevationM", "regEco", "EcoType", "drainageCl")],
+                    mesInfo,
+                    by ="ID_PE") ### SDOMAIN might be missing...
+  standInfo <- QcPSPData$photoInterpretedStands[which(QcPSPData$photoInterpretedStands$ID_PE_MES %in% plotList), c("ID_PE_MES", "CL_AGE", "TYPE_ECO")]
+  colnames(standInfo)[3] <- "TYPE_ECO_PHOTO"
 
+  treeInfo <- merge(QcPSPData$treeIndex[which(!QcPSPData$treeIndex$intruder), c("j", "ESSENCE", "IN_1410")],
+                    QcPSPData$treeMeasurements[which(QcPSPData$treeMeasurements$k %in% plotInfo$k), c("j", "k", "ETAT", "dbhCm", "hauteurM")],
+                    by = "j")
+
+  treeInfo <- treeInfo[which(!treeInfo$ETAT  %in% c("GA", "GM", "GV") & !is.na(treeInfo$ESSENCE)),] # removing statuses GA, GM, and GV as well as missing species
+
+  # treeInfo <- merge(QcPSPData$treeIndex[which(!QcPSPData$treeIndex$intruder), c("j", "ESSENCE", "IN_1410")],
+  #                   QcPSPData$treeMeasurements[which(QcPSPData$treeMeasurements$k %in% plotInfo$k), c("j", "k", "ETAT", "dbhCm", "hauteurM")],
+  #                   by = "j")
+  treeInfo$NB_TIGE <- 1
+  treeInfo[which(treeInfo$IN_1410 == "O"), "NB_TIGE"] <- 16/25
+
+  saplings <- QcPSPData$saplings[which(QcPSPData$saplings$k %in% plotInfo$k),]
+  colnames(saplings)[which(colnames(saplings) == "CL_DHP")] <- "dbhCm"
+  saplings$hauteurM <- NA
+  saplings$ETAT <- "10"
+  saplings$NB_TIGE <- saplings$NB_TIGE * 10
+  treeInfo <- rbind(treeInfo[,c("k", "ESSENCE", "ETAT", "dbhCm", "hauteurM", "NB_TIGE")], saplings)
+  plotInfo <- merge(plotInfo, standInfo, by = "ID_PE_MES")
+  output <- merge(plotInfo, treeInfo, by = "k")
+  outputPlots <- unique(output$ID_PE_MES)
+
+  missingPlots <- setdiff(plotList, outputPlots)
+  if (length(missingPlots) > 0) {
+    message("These plots have no saplings and no trees: ", paste(missingPlots, collapse = ", "))
+    message("We will add a fake sapling to make sure they are properly imported in Artemis-2009.")
+    fakeSaplings <- NULL
+    for (mPlot in missingPlots) {
+      fakeSaplings <- rbind(fakeSaplings, data.frame(ID_PE_MES = mPlot, ESSENCE = "SAB", ETAT = "14", dbhCm = as.integer(2), hauteurM = NA, NB_TIGE = 25))
+    }
+    output_MissingSaplings <- merge(plotInfo,
+                                    fakeSaplings,
+                                    by = "ID_PE_MES")
+    output <- rbind(output, output_MissingSaplings)
+  }
+
+  outputPlots <- unique(output$ID_PE_MES)
+  missingPlots <- setdiff(plotList, outputPlots)
+  if (length(missingPlots) > 0) {
+    stop("Apparently, there are still some plots with no saplings and no trees: ", paste(missingPlots, collapse = ", "))
+  }
+
+  output <- output[order(output$k, -output$dbhCm),]
+  output$ANNEE_SOND <- as.integer(format(output$DATE_SOND, "%Y"))
+
+  output <- output[,c("ID_PE_MES", "latitudeDeg", "longitudeDeg", "elevationM", "regEco", "EcoType", "drainageCl",
+                      "ESSENCE", "ETAT", "dbhCm", "NB_TIGE", "hauteurM", "ANNEE_SOND", "TYPE_ECO_PHOTO", "CL_AGE")]
+  colnames(output) <- c("PLOT", "LATITUDE", "LONGITUDE", "ALTITUDE", "ECOREGION", "TYPEECO", "DRAINAGE_CLASS",
+                        "SPECIES", "TREESTATUS", "TREEDHPCM", "TREEFREQ", "TREEHEIGHT", "ANNEE_SOND", "STANDTYPEECO", "STANDAGE")
+  return(output)
+}
 
 
 

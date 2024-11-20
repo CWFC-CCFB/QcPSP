@@ -7,10 +7,11 @@
 restoreQcPSPData()
 }
 \description{
-This function call creates a list with 7 data.frame objects.
+This function call creates a list called QcPSPData in
+the global environment.
 }
 \details{
-The five data.frame objects are: \cr
+Ths list contains five data.frame objects: \cr
 \itemize{
 \item plots: the index of the plots \cr
 \item treeIndex: the index of the trees \cr
