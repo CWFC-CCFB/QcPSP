@@ -1,5 +1,5 @@
 ###############################
-# Utility functions 
+# Utility functions
 # Mathieu Fortin - March 2020
 ###############################
 
@@ -7,7 +7,7 @@
 removeAllExcept <- function(except="", includeFunctions = F) {
   allObjects <- ls(envir = globalenv())
   if (includeFunctions) {
-    objectsToBeConsidered <- allObjects    
+    objectsToBeConsidered <- allObjects
   } else {
     objectsToBeConsidered <- c()
     for (obj in allObjects) {
@@ -35,7 +35,7 @@ setLastValueOf <- function(dataSet, fieldName, newFieldName, plotIndexField, mea
 extractLastValue <- function(dataSet, fieldName, newFieldName, plotIndexField, measureIndexField) {
   vector <- dataSet[, fieldName]
 #  data <- dataSet[!is.na(vector), c(fieldName, plotIndexField, measureIndexField)]  ### former version that did not account for field set to ""
-  data <- dataSet[which(!is.na(vector) & vector != ""), c(fieldName, plotIndexField, measureIndexField)]   
+  data <- dataSet[which(!is.na(vector) & vector != ""), c(fieldName, plotIndexField, measureIndexField)]
   lastMeasure <- aggregate(formula(paste(measureIndexField, "~", plotIndexField)), data = data, FUN="max")
   data <- merge(data, lastMeasure, by=c(plotIndexField, measureIndexField))
   data <- replaceFieldName(data, length(data[1,]), newFieldName)
@@ -44,7 +44,7 @@ extractLastValue <- function(dataSet, fieldName, newFieldName, plotIndexField, m
 
 createDummyNonMissingValues <- function(dataSet, vectorFieldNames) {
   for (index in 1:length(vectorFieldNames)) {
-    value_i <- as.numeric(!is.na(dataSet[,vectorFieldNames[index]]))    
+    value_i <- as.numeric(!is.na(dataSet[,vectorFieldNames[index]]))
     if (index == 1) {
       value <- value_i
     } else {
@@ -61,7 +61,7 @@ compareTwoDataFrame <- function(dataFrameNew, dataFrameRef) {
     newFields <- colnames(dataFrameNew)[index]
     print(paste("Warning: the new file contains additional fields : ", paste(newFields, collapse = ",")))
   }
-  index <- which(!colnames(dataFrameRef) %in% colnames(dataFrameNew)) 
+  index <- which(!colnames(dataFrameRef) %in% colnames(dataFrameNew))
   if (length(index) > 0) {
     print(index)
     stop(paste("Some fields of the previous file are missing in the new one:", colnames(dataFrameRef)[index]))
@@ -89,8 +89,8 @@ removeTheseFields <- function(dataSet, fieldsToBeRemoved) {
 }
 
 readRDSFile <- function() {
-  if (file.exists("QcPSP.Rds")) {
-    return(readRDS("QcPSP.Rds"))
+  if (file.exists("./compilation/QcPSP.Rds")) {
+    return(readRDS("./compilation/QcPSP.Rds"))
   } else {
     return(list())
   }

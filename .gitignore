@@ -50,9 +50,12 @@ rsconnect/
 
 # compilation folder exclusions
 compilation/PEP.mdb
-compilation/ReadTrees.RData
 compilation/SBW/*
 compilation/JavaProcessing/.classpath
 compilation/JavaProcessing/.project
 compilation/JavaProcessing/.settings/*
+compilation/treesBeforeCorrection.csv
+compilation/treesCorrected.csv
 
+# J4R files exclusions
+J4RServer*

@@ -3,11 +3,12 @@
 # Mathieu Fortin - July 2023
 #   @output It produces ReadTrees.RData which
 #               is a list that contains:
-#               indexMeasurements,
-#               dataStation,
-#               dataTrees,
-#               indexPlots,
-#               dataSapling
+#               measurements,
+#               sites,
+#               photoInterpretedStands,
+#               trees,
+#               plots,
+#               saplings
 #############################################
 
 rm(list=ls())
