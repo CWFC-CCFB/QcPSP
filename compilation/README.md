@@ -1,17 +1,12 @@
-QcPSPChecker
+PSP Compilation
 ===============================
 
-This project checks the tree data and makes some corrections on tree status and species. The original data was produced and made freely available online
-at https://www.donneesquebec.ca/recherche/dataset/placettes-echantillons-permanentes-1970-a-aujourd-hui by Direction des inventaires forestiers
-of Ministère des Ressources naturelles et des Forêts. 
-
-This repository should be cloned as follows:
-
-~~~
-svn checkout https://svn.code.sf.net/p/mrnfforesttools/qcpspchecker/code/trunk QcPSPChecker
-~~~
-
-Run the two scripts:
+Run the three scripts:
 
 - 0_ReadTrees.R
+  Make sure to unzip the /compilation/PEP.7z file before
 - 1_CreatingCleanDataBase.R
+- 2_SBW_ImportData.R
+  Check the file header to know the GIS layer to import
+
+The output file "QcPSP.Rds" should be copied to the inst/extdata folder.

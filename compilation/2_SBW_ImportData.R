@@ -16,12 +16,12 @@
 # 1967 à 1991 (https://www.donneesquebec.ca/recherche/dataset/donnees-sur-les-perturbations-naturelles-insecte-tordeuse-des-bourgeons-de-lepinette/resource/390e0b04-08fa-4fb3-93bb-16854f301dd8)
 # last modification 2017-11-23
 #
-# Accessed on June 26th, 2024 
+# Accessed on June 26th, 2024
 #
 ###########################
 
 rm(list = ls())
-source("utilityFunctions.R")
+source("./compilation/utilityFunctions.R")
 
 sf::sf_use_s2(T)
 
@@ -35,7 +35,7 @@ validateLayer <- function(filename) {
   layer <- st_read(filename)
   message("Validating layer")
   layer <- sf::st_make_valid(layer)
-  return(layer)  
+  return(layer)
 }
 
 clipLayer <- function(polygonLayer) {
@@ -47,40 +47,41 @@ clipLayer <- function(polygonLayer) {
     plotLayerWithSBW <- sf::st_intersection(plotLayer, polygonYear)
     output <- rbind(output, plotLayerWithSBW)
   }
-  return(output)  
+  return(output)
 }
 
-hist1967_1991 <- validateLayer("./SBW/TBE_Historique_1967-1991/Historique_TBE_1967_1991.shp")
-hist1992_2006 <- validateLayer("./SBW/TBE_Donnees_1992-2006/TBE_1992_2006.shp")
-hist2007_2013 <- validateLayer("./SBW/TBE_Donnees_2007-2013/TBE_2007_2013.shp")
-hist2014_auj <- validateLayer("./SBW/TBE_Donnees_2014-aujourdhui/TBE_2014_2023.shp")
+hist1967_1991 <- validateLayer("./compilation/SBW/TBE_Historique_1967-1991/Historique_TBE_1967_1991.shp")
+hist1992_2006 <- validateLayer("./compilation/SBW/TBE_Donnees_1992-2006/TBE_1992_2006.shp")
+hist2007_2013 <- validateLayer("./compilation/SBW/TBE_Donnees_2007-2013/TBE_2007_2013.shp")
+hist2014_auj <- validateLayer("./compilation/SBW/TBE_Donnees_2014-aujourdhui/TBE_2014_2023.shp")
 
-plotIndex <- readRDS("QcPlotIndex.Rds")
+output <- readRDSFile()
+plotIndex <- output$plots
 crs <- sf::st_crs(hist1992_2006)
 plotLayer <- sf::st_as_sf(plotIndex, coords = c("longitudeDeg", "latitudeDeg"), dim = "XY", crs = crs)
 
 sf_use_s2(F) # we don't use the s2 model
 
-SBW1967_1991 <- clipLayer(hist1967_1991) 
+SBW1967_1991 <- clipLayer(hist1967_1991)
 SBW1967_1991 <- SBW1967_1991[which(SBW1967_1991$NIVEAU != 0),]
 SBW1967_1991[which(SBW1967_1991$NIVEAU %in% c(1,4,11)), "Niveau"] <- "Léger"
 SBW1967_1991[which(SBW1967_1991$NIVEAU %in% c(2,5,6,12,13)), "Niveau"] <- "Modéré"
 SBW1967_1991[which(SBW1967_1991$NIVEAU %in% c(3,7,14,15)), "Niveau"] <- "Grave"
 table(SBW1967_1991$NIVEAU, SBW1967_1991$Niveau, useNA = "always")
 
-SBW1992_2006 <- clipLayer(hist1992_2006) 
+SBW1992_2006 <- clipLayer(hist1992_2006)
 unique(SBW1992_2006$Niveau)
 
-SBW2007_2013 <- clipLayer(hist2007_2013) 
+SBW2007_2013 <- clipLayer(hist2007_2013)
 SBW2007_2013$Niveau <- SBW2007_2013$NIVEAU
 unique(SBW2007_2013$Niveau)
 
-SBW2014_auj <- clipLayer(hist2014_auj) 
+SBW2014_auj <- clipLayer(hist2014_auj)
 SBW2014_auj <- SBW2014_auj[which(SBW2014_auj$Niveau != "Présence"),]
 unique(SBW2014_auj$Niveau)
 
 fieldsToKeep <- c("newID_PE", "ANNEE", "Niveau")
-SBWTotal <- rbind(SBW1967_1991[,fieldsToKeep], 
+SBWTotal <- rbind(SBW1967_1991[,fieldsToKeep],
                   SBW1992_2006[,fieldsToKeep],
                   SBW2007_2013[,fieldsToKeep],
                   SBW2014_auj[,fieldsToKeep])
@@ -101,18 +102,19 @@ colnames(castedData) <- fieldNames
 QcSBWDefoliation <- castedData
 
 #QcSBWDefoliation <- readRDS("QcSBWDefoliation.Rds")
-QcSBWDefoliation <- merge(plotIndex[,c("ID_PE","newID_PE")], QcSBWDefoliation, by="newID_PE", all.x=T)
+QcSBWDefoliation <- merge(output$plots[,c("ID_PE","newID_PE")], QcSBWDefoliation, by="newID_PE", all.x=T)
 QcSBWDefoliation <- QcSBWDefoliation[,colnames(QcSBWDefoliation)[which(colnames(QcSBWDefoliation) != "ID_PE")]]
 for (c in colnames(QcSBWDefoliation)) {
   if (any(is.na(QcSBWDefoliation[,c]))) {
     QcSBWDefoliation[which(is.na(QcSBWDefoliation[,c])),c] <- 0
-  } 
+  }
 }
 
-output <- readRDSFile()
-QcSBWDefoliation <- readRDS("QcSBWDefoliation.Rds")
+if ("sbwDefoliations" %in% names(output)) {
+  compareTwoDataFrame(QcSBWDefoliation, output$sbwDefoliations)
+}
 output[["sbwDefoliations"]] <- QcSBWDefoliation
-saveRDS(output, file = "QcPSP.Rds", compress = "xz")
+saveRDS(output, file = "./compilation/QcPSP.Rds", compress = "xz")
 
 
 
