@@ -28,49 +28,38 @@
 #'
 #' Restore Quebec PSP Data in the Global Environment.
 #'
-#' @description This function call creates four data.frame objects that contain
-#' the tree measurements.
+#' @description This function call creates a list with 7 data.frame objects.
 #'
 #' @details
 #'
 #' The five data.frame objects are: \cr
 #' \itemize{
-#' \item QcPlotIndex: the index of the plots \cr
-#' \item QcTreeIndex: the index of the trees \cr
-#' \item QcMeasurementIndex: the index of the plot measurements \cr
-#' \item QcTreeMeasurements: the tree measurements \cr
-#' \item QcSaplingMeasurements: the tally of the sapling in the 40 m2 subplot \cr
-#' \item QcSBWDefoliation: the spruce budworm defoliation indices for the plot \cr
-#' \item QcPhotoInterpretation: the photo interpreted stand around the plot \cr
+#' \item plots: the index of the plots \cr
+#' \item treeIndex: the index of the trees \cr
+#' \item plotMeasurements: the index of the plot measurements \cr
+#' \item treeMeasurements: the tree measurements \cr
+#' \item saplings: the tally of the sapling in the 40 m2 subplot \cr
+#' \item sbwDefoliations : the spruce budworm defoliation indices for the plot \cr
+#' \item photoInterpretedStands: the photo interpreted stand around the plot \cr
 #' }
 #'
 #' @export
 restoreQcPSPData <- function() {
-  assign("QcPlotIndex", .loadPackageData("QcPlotIndex"), envir = .GlobalEnv)
-  assign("QcTreeIndex", .loadPackageData("QcTreeIndex"), envir = .GlobalEnv)
-  assign("QcMeasurementIndex", .loadPackageData("QcMeasurementIndex"), envir = .GlobalEnv)
-  assign("QcTreeMeasurements", .loadPackageData("QcTreeMeasurements"), envir = .GlobalEnv)
-  assign("QcSaplingMeasurements", .loadPackageData("QcSaplingMeasurements"), envir = .GlobalEnv)
-  assign("QcSBWDefoliation", .loadPackageData("QcSBWDefoliation"), envir = .GlobalEnv)
-  assign("QcPhotoInterpretation", .loadPackageData("QcPhotoInterpretation"), envir = .GlobalEnv)
+  assign("QcPSP", .loadPackageData("QcPSP"), envir = .GlobalEnv)
 }
 
 
 #'
-#' Provide the metadata for any of the four data.frame objects
+#' Provide the metadata for any of the seven data.frame objects
 #'
-#' @param dFrame a data.frame object. Any of these six: QcPlotIndex, QcTreeIndex,
-#' QcMeasurementIndex, QcTreeMeasurements, QcSaplingMeasurements, or QcSBWDefoliation
+#' @param tableName a string among these six: plots, plotMeasurements, treeIndex,
+#' treeMeasurements, saplings, and sbwDefoliations
+#'
 #' @return a data.frame object containing the metadata.
 #'
 #' @export
-getMetaData <- function(dFrame) {
-  if (methods::is(dFrame, "character")) {
-    objectName <- dFrame
-  } else {
-    objectName <- deparse(substitute(dFrame))
-  }
-  if (objectName == "QcPlotIndex") {
+getMetaData <- function(tableName) {
+  if (tableName == "plots") {
     fieldNames <- c("ID_PE", "newID_PE", "nbMeasurementsAfterFiltering",
                     "minYearAfterFiltering", "maxYearAfterFiltering", "latitudeDeg",
                     "longitudeDeg", "elevationM", "regEco",
@@ -95,7 +84,7 @@ getMetaData <- function(dFrame) {
                      "Humus pH.",
                      "A binary variable to indicates that there is no missing information at the plot level.")
     return(data.frame(Field = fieldNames, Description = description))
-  } else if (objectName == "QcMeasurementIndex") {
+  } else if (tableName == "plotMeasurements") {
     fieldNames <- c("newID_PE", "k", "ID_PE_MES", "ID_PE", "year", "NO_MES", "ORIGINE", "PERTURB",
                     "DATE_SOND", "newNO_MES", "N_xxx", "G_xxx")
     description <- c("PSP identifier after plot filtering and correction. Link to table QcPlotIndex.",
@@ -111,7 +100,7 @@ getMetaData <- function(dFrame) {
                      "Stem density (trees/ha) of species xxx. TOT stands for all-species density. For species code, see tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
                      "Basal area (m^2/ha) of species xxx. TOT stands for all-species basal area. For species code, see tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.")
     return(data.frame(Field = fieldNames, Description = description))
-  } else if (objectName == "QcTreeIndex") {
+  } else if (tableName == "treeIndex") {
     fieldNames <- c("newID_PE", "j", "NO_ARBRE", "ESSENCE", "nbMeasurements", "minYear",
                     "maxYear", "IN_1410", "intruder")
     description <- c("PSP identifier after plot filtering and correction. Link to table QcPlotIndex.",
@@ -124,7 +113,7 @@ getMetaData <- function(dFrame) {
                      "A location identifier for trees with DBH > 31 cm. O: The tree is part of the outer circle of the 14.10-m radius plot.",
                      "A boolean. True if the tree is an intruder.")
     return(data.frame(Field = fieldNames, Description = description))
-  } else if (objectName == "QcTreeMeasurements") {
+  } else if (tableName == "treeMeasurements") {
     fieldNames <- c("j", "k", "ETAT", "dbhCm", "hauteurM", "BAL", "NIVLECTAGE", "AGE", "SOURCE_AGE")
     description <- c("Tree index after filtering and correction. Link to table QcTreeIndex.",
                      "Measurement index after filtering and correction. Link to table QcMeasurementIndex.",
@@ -136,20 +125,20 @@ getMetaData <- function(dFrame) {
                      "Tree age",
                      "Additional information on how tree age was measured. See tab SOURCE_AGE in file DICTIONNAIRE_PLACETTE.xlsx.")
     return(data.frame(Field = fieldNames, Description = description))
-  } else if (objectName == "QcSaplingMeasurements") {
+  } else if (tableName == "saplings") {
     fieldNames <- c("k", "ESSENCE", "CL_DHP", "NB_TIGE")
     description <- c("Measurement index after filtering and correction. Link to table QcMeasurementIndex.",
                      "Species code. See tab ESSENCES in file DICTIONNAIRE_PLACETTE.xlsx.",
                      "Class of DBH (cm). Those are 2-cm diameter class. The value denotes the median.",
                      "Number of saplings tallied in the 40 m2 subplot.")
     return(data.frame(Field = fieldNames, Description = description))
-  } else if (objectName == "QcSBWDefoliation") {
+  } else if (tableName == "sbwDefoliations") {
     fieldNames <- c("newID_PE", "d1968")
     description <- c("PSP identifier after plot filtering and correction. Link to table QcPlotIndex.",
                      "The field name contains the year. The field contains the values 0 (no defoliation), 1 (light defoliation), 2 (moderate defoliation), or 3 (severe defoliation)")
     return(data.frame(Field = fieldNames, Description = description))
   } else {
-    warning("Expecting any of these six data.frame objects: QcPlotIndex, QcTreeIndex, QcMeasurementIndex, QcTreeMeasurements, QcSBWDefoliation, or QcSaplingMeasurements!")
+    warning("Expecting any of these six character strings: plots, plotMeasurements, treeIndex, treeMeasurements, sbwDefoliations, or saplings!")
   }
 }
 

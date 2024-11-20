@@ -7,18 +7,17 @@
 restoreQcPSPData()
 }
 \description{
-This function call creates four data.frame objects that contain
-the tree measurements.
+This function call creates a list with 7 data.frame objects.
 }
 \details{
 The five data.frame objects are: \cr
 \itemize{
-\item QcPlotIndex: the index of the plots \cr
-\item QcTreeIndex: the index of the trees \cr
-\item QcMeasurementIndex: the index of the plot measurements \cr
-\item QcTreeMeasurements: the tree measurements \cr
-\item QcSaplingMeasurements: the tally of the sapling in the 40 m2 subplot \cr
-\item QcSBWDefoliation: the spruce budworm defoliation indices for the plot \cr
-\item QcPhotoInterpretation: the photo interpreted stand around the plot \cr
+\item plots: the index of the plots \cr
+\item treeIndex: the index of the trees \cr
+\item plotMeasurements: the index of the plot measurements \cr
+\item treeMeasurements: the tree measurements \cr
+\item saplings: the tally of the sapling in the 40 m2 subplot \cr
+\item sbwDefoliations : the spruce budworm defoliation indices for the plot \cr
+\item photoInterpretedStands: the photo interpreted stand around the plot \cr
 }
 }
