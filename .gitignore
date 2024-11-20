@@ -47,3 +47,12 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# compilation folder exclusions
+compilation/PEP.mdb
+compilation/ReadTrees.RData
+compilation/SBW/*
+compilation/JavaProcessing/.classpath
+compilation/JavaProcessing/.project
+compilation/JavaProcessing/.settings/*
+

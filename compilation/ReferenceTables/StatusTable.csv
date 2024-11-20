@@ -1,0 +1,26 @@
+﻿ETAT,STATUT,DescEtat
+10,Vivant,Arbre sur pied vivant
+12,Vivant,Arbre vivant renversé ou encroué (chablis)
+14,Mort,Arbre mort sur pied
+15,Mort,Arbre mort
+16,Mort,Chicot
+23,Mort,Arbre disparu
+24,Mort,Arbre disparu ou chicot
+25,Intrus,Intrus
+26,Recolte,Arbre coupé
+29,Vivant,Arbre non identifiable ou arbres soudés
+30,Vivant,Arbre vivant sur pied oublié
+32,Vivant,Arbre vivant renversé ou encroué (chablis) oublié
+34,Mort,Arbre mort sur pied oublié
+35,Mort,Arbre mort oublié
+36,Mort,Chicot oublié
+40,Vivant,Recrue vivante sur pied
+42,Vivant,Recrue vivante renversée ou encrouée (chablis)
+44,Mort,Recrue morte sur pied
+45,Mort,Recrue morte
+46,Mort,Recrue chicot
+50,Vivant,Arbre sur pied vivant renuméroté
+52,Vivant,Arbre vivant renversé ou encroué (chablis) renuméroté
+54,Mort,Arbre mort sur pied renuméroté
+55,Mort,Arbre mort sur pied renuméroté
+56,Mort,Chicot renuméroté
