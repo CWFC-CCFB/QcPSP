@@ -47,3 +47,17 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# compilation folder exclusions
+compilation/PEP.mdb
+compilation/SBW/*
+compilation/JavaProcessing/.classpath
+compilation/JavaProcessing/.project
+compilation/JavaProcessing/.settings/*
+compilation/treesBeforeCorrection.csv
+compilation/treesCorrected.csv
+compilation/correctedTreeMeasurementsIntermediate.RData
+compilation/measurementIndexIntermediate.RData
+
+# J4R files exclusions
+J4RServer*

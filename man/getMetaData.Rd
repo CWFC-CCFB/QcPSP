@@ -2,17 +2,17 @@
 % Please edit documentation in R/QcPSP.R
 \name{getMetaData}
 \alias{getMetaData}
-\title{Provide the metadata for any of the four data.frame objects}
+\title{Provide the metadata for any of the seven data.frame objects}
 \usage{
-getMetaData(dFrame)
+getMetaData(tableName)
 }
 \arguments{
-\item{dFrame}{a data.frame object. Any of these six: QcPlotIndex, QcTreeIndex,
-QcMeasurementIndex, QcTreeMeasurements, QcSaplingMeasurements, or QcSBWDefoliation}
+\item{tableName}{a string among these six: plots, plotMeasurements, treeIndex,
+treeMeasurements, saplings, and sbwDefoliations}
 }
 \value{
 a data.frame object containing the metadata.
 }
 \description{
-Provide the metadata for any of the four data.frame objects
+Provide the metadata for any of the seven data.frame objects
 }

@@ -4,20 +4,24 @@
 
 restoreQcPSPData()
 
-test_that("Testing nb rows in QcPlotIndex", {expect_equal(nrow(QcPlotIndex), 12816)})
-test_that("Testing nb rows in QcTreeIndex", {expect_equal(nrow(QcTreeIndex), 814232)})
-test_that("Testing nb rows in QcMeasurementIndex", {expect_equal(nrow(QcMeasurementIndex), 50430)})
-test_that("Testing nb rows in QcTreeMeasurements", {expect_equal(nrow(QcTreeMeasurements), 2089280)})
-test_that("Testing nb rows in QcSaplingMeasurements", {expect_equal(nrow(QcSaplingMeasurements), 223475)})
-test_that("Testing nb rows in QcSaplingMeasurements", {expect_equal(nrow(QcSBWDefoliation), 12816)})
-test_that("Testing nb rows in QcPhotoInterpretation", {expect_equal(nrow(QcPhotoInterpretation), 51083)})
+test_that("Testing nb rows in plots table", {expect_equal(nrow(QcPSPData$plots), 12816)})
+test_that("Testing nb rows in treeIndex table", {expect_equal(nrow(QcPSPData$treeIndex), 814232)})
+test_that("Testing nb rows in plotMeasurements table", {expect_equal(nrow(QcPSPData$plotMeasurements), 50430)})
+test_that("Testing nb rows in treeMeasurements table", {expect_equal(nrow(QcPSPData$treeMeasurements), 2089280)})
+test_that("Testing nb rows in saplings table", {expect_equal(nrow(QcPSPData$saplings), 223475)})
+test_that("Testing nb rows in sbwDefoliations table", {expect_equal(nrow(QcPSPData$sbwDefoliations), 12816)})
+test_that("Testing nb rows in photoInterpretedStands table", {expect_equal(nrow(QcPSPData$photoInterpretedStands), 51083)})
 
 
 
-test_that("Testing nb rows in metadata of QcPlotIndex", {expect_equal(nrow(getMetaData(QcPlotIndex)), 17)})
-test_that("Testing nb rows in metadata of QcTreeIndex", {expect_equal(nrow(getMetaData(QcTreeIndex)), 9)})
-test_that("Testing nb rows in metadata of QcMeasurementIndex", {expect_equal(nrow(getMetaData(QcMeasurementIndex)), 12)})
-test_that("Testing nb rows in metadata of QcTreeMeasurements", {expect_equal(nrow(getMetaData(QcTreeMeasurements)), 9)})
-test_that("Testing nb rows in metadata of QcSaplingMeasurements", {expect_equal(nrow(getMetaData(QcSaplingMeasurements)), 4)})
-test_that("Testing nb rows in metadata of QcSaplingMeasurements", {expect_equal(nrow(getMetaData(QcSBWDefoliation)), 2)})
+test_that("Testing nb rows in metadata of plots table", {expect_equal(nrow(getMetaData("plots")), 17)})
+test_that("Testing nb rows in metadata of treeIndex table", {expect_equal(nrow(getMetaData("treeIndex")), 9)})
+test_that("Testing nb rows in metadata of plotMeasurements table", {expect_equal(nrow(getMetaData("plotMeasurements")), 12)})
+test_that("Testing nb rows in metadata of treeMeasurements table", {expect_equal(nrow(getMetaData("treeMeasurements")), 9)})
+test_that("Testing nb rows in metadata of saplings table", {expect_equal(nrow(getMetaData("saplings")), 4)})
+test_that("Testing nb rows in metadata of sbwDefoliations table", {expect_equal(nrow(getMetaData("sbwDefoliations")), 2)})
 
+listPlotMes <- QcPSPData$plotMeasurements[1:10, "ID_PE_MES"]
+sample <- QcPSP::extractArtemis2009FormatFromTSP4ForMetaModelling(QcPSPData, listPlotMes)
+#table(sample$SPECIES, useNA = "always")
+test_that("Testing nb rows in Artemis-2009 sample", {expect_equal(nrow(sample), 313)})

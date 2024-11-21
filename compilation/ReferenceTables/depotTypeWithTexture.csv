@@ -1,0 +1,112 @@
+depot,Freq,depth,texture,depthCm,depth2
+0A,36,Epais,2Mixed,100,1Thick
+1A,286272,Epais,2Mixed,100,1Thick
+1AA,2340,Epais,2Mixed,100,1Thick
+1AB,396,Epais,2Mixed,100,1Thick
+1AD,3348,Epais,2Mixed,100,1Thick
+1ADY,72,Moyen,2Mixed,75,2Average
+1AM,98352,Mince,2Mixed,37,3Shallow
+1AY,313380,Moyen,2Mixed,75,2Average
+1BA,108,Epais,2Mixed,100,1Thick
+1BD,792,Epais,2Mixed,100,1Thick
+1BF,216,Epais,2Mixed,100,1Thick
+1BG,828,Epais,2Mixed,100,1Thick
+1BGY,108,Moyen,2Mixed,75,2Average
+1BI,0,Epais,2Mixed,100,1Thick
+1BN,36,Epais,2Mixed,100,1Thick
+1BP,2268,Epais,2Mixed,100,1Thick
+1BPY,0,Moyen,2Mixed,75,2Average
+1BT,36,Epais,2Mixed,100,1Thick
+2A,20304,Epais,1Crude,100,1Thick
+2AE,2016,Epais,1Crude,100,1Thick
+2AK,288,Epais,1Crude,100,1Thick
+2AM,72,Mince,1Crude,37,3Shallow
+2AT,288,Epais,1Crude,100,1Thick
+2AY,900,Moyen,1Crude,75,2Average
+2B,108,Epais,1Crude,100,1Thick
+2BD,936,Epais,1Crude,100,1Thick
+2BE,37368,Epais,1Crude,100,1Thick
+2BEM,108,Mince,1Crude,37,3Shallow
+2BEY,324,Moyen,1Crude,75,2Average
+2BP,108,Epais,1Crude,100,1Thick
+3A,1,Epais,2Mixed,100,1Thick
+3AC,108,Epais,2Mixed,100,1Thick
+3AE,1764,Epais,2Mixed,100,1Thick
+3AN,7164,Epais,2Mixed,100,1Thick
+3ANM,-99,Mince,2Mixed,37,3Shallow
+3ANY,216,Moyen,2Mixed,75,2Average
+3D,108,Epais,1Crude,100,1Thick
+3DD,108,Epais,1Crude,100,1Thick
+4A,1656,Epais,3Fine,100,1Thick
+4GA,33120,Epais,3Fine,100,1Thick
+4GAY,288,Moyen,3Fine,75,2Average
+4GD,108,Epais,2Mixed,100,1Thick
+4GS,13788,Epais,1Crude,100,1Thick
+4GSM,0,Mince,1Crude,37,3Shallow
+4GSY,1008,Moyen,1Crude,75,2Average
+4P,180,Epais,1Crude,100,1Thick
+4PY,36,Moyen,1Crude,75,2Average
+5A,9540,Epais,3Fine,100,1Thick
+5AY,72,Moyen,3Fine,75,2Average
+5G,648,Epais,3Fine,100,1Thick
+5GY,108,Moyen,3Fine,75,2Average
+5L,144,Epais,3Fine,100,1Thick
+5LY,-99,Moyen,3Fine,75,2Average
+5S,26748,Epais,1Crude,100,1Thick
+5SM,216,Mince,1Crude,37,3Shallow
+5SY,468,Moyen,1Crude,75,2Average
+6A,0,Epais,1Crude,100,1Thick
+6G,144,Epais,1Crude,100,1Thick
+6S,4644,Epais,1Crude,100,1Thick
+6SM,36,Mince,1Crude,37,3Shallow
+6SY,576,Moyen,1Crude,75,2Average
+7E,33228,Epais,3Fine,100,1Thick
+7L,648,Epais,3Fine,100,1Thick
+7LM,108,Mince,3Fine,37,3Shallow
+7LY,288,Moyen,3Fine,75,2Average
+7T,27360,Epais,3Fine,100,1Thick
+7TM,1008,Mince,3Fine,37,3Shallow
+7TY,3420,Moyen,3Fine,75,2Average
+8A,11664,Epais,2Mixed,100,1Thick
+8AA,360,Epais,2Mixed,100,1Thick
+8AAM,576,Mince,2Mixed,37,3Shallow
+8AAY,2232,Moyen,2Mixed,75,2Average
+8AC,72,Epais,2Mixed,100,1Thick
+8ACM,108,Mince,2Mixed,37,3Shallow
+8ACY,324,Moyen,2Mixed,75,2Average
+8AM,6264,Mince,2Mixed,37,3Shallow
+8APM,108,Mince,2Mixed,37,3Shallow
+8AY,14724,Moyen,2Mixed,75,2Average
+8C,288,Epais,3Fine,100,1Thick
+8CM,0,Mince,3Fine,37,3Shallow
+8CY,216,Moyen,3Fine,75,2Average
+8E,1008,Epais,1Crude,100,1Thick
+8EM,0,Mince,1Crude,37,3Shallow
+9A,0,Epais,1Crude,100,1Thick
+9S,1116,Epais,1Crude,100,1Thick
+M1A,17388,Tres mince,2Mixed,15,4VeryShallow
+M1AD,0,Tres mince,2Mixed,15,4VeryShallow
+M2A,-99,Tres mince,1Crude,14,4VeryShallow
+M4A,0,Tres mince,3Fine,15,4VeryShallow
+M5A,72,Tres mince,3Fine,15,4VeryShallow
+M5S,0,Tres mince,1Crude,15,4VeryShallow
+M6S,0,Tres mince,1Crude,15,4VeryShallow
+M7L,432,Tres mince,3Fine,15,4VeryShallow
+M7T,1116,Tres mince,3Fine,15,4VeryShallow
+M8A,576,Tres mince,2Mixed,15,4VeryShallow
+M8AA,108,Tres mince,2Mixed,15,4VeryShallow
+M8AC,-99,Tres mince,3Fine,15,4VeryShallow
+R,4824,Roc,1Crude,0,4VeryShallow
+R1A,42660,Affleurements,2Mixed,5,4VeryShallow
+R3AN,108,Affleurements,2Mixed,5,4VeryShallow
+R4GA,0,Affleurements,2Mixed,5,4VeryShallow
+R5A,36,Affleurements,3Fine,5,4VeryShallow
+R5G,36,Affleurements,3Fine,5,4VeryShallow
+R5L,-99,Affleurements,3Fine,5,4VeryShallow
+R5S,216,Affleurements,1Crude,5,4VeryShallow
+R6S,108,Affleurements,1Crude,5,4VeryShallow
+R7L,108,Affleurements,3Fine,5,4VeryShallow
+R7T,540,Affleurements,3Fine,5,4VeryShallow
+R8A,252,Affleurements,2Mixed,5,4VeryShallow
+RC,0,Affleurements,1Crude,5,4VeryShallow
+RS,0,Affleurements,1Crude,5,4VeryShallow
