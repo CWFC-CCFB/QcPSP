@@ -145,14 +145,20 @@ getMetaData <- function(tableName) {
 
 #'
 #' Extract plot list for Artemis-2009 simulation
-#' @param QcPSPData the database that is retrieved through the restoreQcPSPData function
-#' @param list_ID_PE_MES a vector of numerics that stand for the ID_PE_MES
-#' @return a data.frame object formatted for Capsis Web API
+#' @param QcPSPData the database that is retrieved through the restoreQcPSPData
+#' function
+#' @param list_ID_PE_MES a vector of numerics that stand for the ID_PE_MES. The
+#' ID_PE_MES field is found in the plotMeasurements data.frame of the
+#' database.
+#' @return a data.frame object formatted for Capsis simulation
 #'
 #' @export
-extractArtemis2009FormatFromTSP4ForMetaModelling <- function(QcPSPData, list_ID_PE_MES) {
+extractArtemis2009FormatFromPSPForMetaModelling <- function(QcPSPData, list_ID_PE_MES) {
   plotList <- unique(list_ID_PE_MES) ### make sure there is no duplicate
   mesInfo <- QcPSPData$plotMeasurements[which(QcPSPData$plotMeasurements$ID_PE_MES %in% plotList), c("ID_PE", "k", "ID_PE_MES", "DATE_SOND")]
+  if (nrow(mesInfo) == 0) {
+    stop("None of ID_PE_MES has been found in the plotMeasurements table!")
+  }
   plotInfo <- merge(QcPSPData$plots[, c("ID_PE", "latitudeDeg", "longitudeDeg", "elevationM", "regEco", "EcoType", "drainageCl")],
                     mesInfo,
                     by ="ID_PE") ### SDOMAIN might be missing...
