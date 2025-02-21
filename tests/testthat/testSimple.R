@@ -22,6 +22,21 @@ test_that("Testing nb rows in metadata of saplings table", {expect_equal(nrow(ge
 test_that("Testing nb rows in metadata of sbwDefoliations table", {expect_equal(nrow(getMetaData("sbwDefoliations")), 2)})
 
 listPlotMes <- QcPSPData$plotMeasurements[1:10, "ID_PE_MES"]
-sample <- QcPSP::extractArtemis2009FormatFromTSP4ForMetaModelling(QcPSPData, listPlotMes)
+sample <- QcPSP::extractArtemis2009FormatFromPSPForMetaModelling(QcPSPData, listPlotMes)
 #table(sample$SPECIES, useNA = "always")
 test_that("Testing nb rows in Artemis-2009 sample", {expect_equal(nrow(sample), 313)})
+
+out <- tryCatch(
+  {
+    QcPSP::extractArtemis2009FormatFromPSPForMetaModelling(QcPSPData,119600902)
+    FALSE
+  },
+  error = function(cond) {
+    TRUE
+  }
+)
+test_that("An error has been returned when no measurement matches those of the list_ID_PE_MES argument",
+          {expect_equal(out, TRUE)})
+
+
+
