@@ -39,4 +39,13 @@ test_that("An error has been returned when no measurement matches those of the l
           {expect_equal(out, TRUE)})
 
 
+sample <- QcPSP::extractArtemis2009FormatFromPSPForMetaModelling(QcPSPData, 9910010101)
+test_that("Testing nb rows in Artemis-2009 second sample", {expect_equal(nrow(sample), 29)})
+
+
+test_that("The type of newID_PE field is now integer64",
+          {expect_equal("integer64" %in% class(QcPSPData$plots$newID_PE), TRUE)})
+
+
+
 
