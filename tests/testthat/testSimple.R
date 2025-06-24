@@ -39,4 +39,9 @@ test_that("An error has been returned when no measurement matches those of the l
           {expect_equal(out, TRUE)})
 
 
+test_that("The type of newID_PE field is now integer64",
+          {expect_equal("integer64" %in% class(QcPSPData$plots$newID_PE), TRUE)})
+
+
+
 
