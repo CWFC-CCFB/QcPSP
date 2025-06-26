@@ -9,7 +9,7 @@
 
 rm(list = ls())
 source("./compilation/utilityFunctions.R")
-require(bit64)
+#require(bit64)
 output <- readRDSFile()
 newOutput <- list()
 integerFields <- c("ID_PE", "newID_PE", "ID_PE_MES")
@@ -19,19 +19,14 @@ for (n in names(output)) {
   for (f in integerFields) {
     if (f %in% colnames(df)) {
       message("    Processing field ", f)
-      if (any(abs(df[,f]) > 2147483647)) {
-        if (!"integer64" %in% class(df[,f])) {
-          df[,f] <- as.integer64(as.character(df[,f]))
-        }
-      } else {
-        if (!"integer" %in% class(df[,f])) {
-          df[,f] <- as.integer(df[,f])
-        }
+      if (class(df[,f]) %in% c("integer64", "integer", "numeric")) {
+        df[,f] <- trimws(format(df[,f], scientific= F))
       }
     }
   }
   newOutput[[n]] <- df
 }
 saveRDS(newOutput, file = "./compilation/QcPSP.Rds", compress = "xz")
+saveRDS(newOutput, file = "./inst/extdata/QcPSP.Rds", compress = "xz")
 
 

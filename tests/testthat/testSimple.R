@@ -13,7 +13,6 @@ test_that("Testing nb rows in sbwDefoliations table", {expect_equal(nrow(QcPSPDa
 test_that("Testing nb rows in photoInterpretedStands table", {expect_equal(nrow(QcPSPData$photoInterpretedStands), 51083)})
 
 
-
 test_that("Testing nb rows in metadata of plots table", {expect_equal(nrow(getMetaData("plots")), 17)})
 test_that("Testing nb rows in metadata of treeIndex table", {expect_equal(nrow(getMetaData("treeIndex")), 9)})
 test_that("Testing nb rows in metadata of plotMeasurements table", {expect_equal(nrow(getMetaData("plotMeasurements")), 12)})
@@ -44,7 +43,15 @@ test_that("Testing nb rows in Artemis-2009 second sample", {expect_equal(nrow(sa
 
 
 test_that("The type of newID_PE field is now integer64",
-          {expect_equal("integer64" %in% class(QcPSPData$plots$newID_PE), TRUE)})
+          {expect_equal("character" %in% class(QcPSPData$plots$newID_PE), TRUE)})
+
+HelinData <- read.csv("./UA2471PEPALT.csv")
+sample <- QcPSP::extractArtemis2009FormatFromPSPForMetaModelling(QcPSPData, HelinData$id_pe_mes)
+
+test_that("The number of plots in the sample",
+          {expect_equal(length(unique(sample$PLOT)), length(unique(HelinData$id_pe_mes)))})
+test_that("The number of observation in the sample",
+          {expect_equal(nrow(sample), 4491)})
 
 
 

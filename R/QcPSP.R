@@ -154,7 +154,7 @@ getMetaData <- function(tableName) {
 #'
 #' @export
 extractArtemis2009FormatFromPSPForMetaModelling <- function(QcPSPData, list_ID_PE_MES) {
-  plotList <- bit64::as.integer64(unique(list_ID_PE_MES)) ### make sure there is no duplicate
+  plotList <- trimws(format(unique(list_ID_PE_MES), scientific = F)) ### make sure there is no duplicate
   mesInfo <- QcPSPData$plotMeasurements[which(QcPSPData$plotMeasurements$ID_PE_MES %in% plotList), c("ID_PE", "k", "ID_PE_MES", "DATE_SOND")]
   if (nrow(mesInfo) == 0) {
     stop("None of ID_PE_MES has been found in the plotMeasurements table!")
